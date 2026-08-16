@@ -1,0 +1,44 @@
+media:
+  input: images/oeuvres
+  output: /images/oeuvres
+  rename: safe
+  categories: [image]
+
+content:
+  - name: oeuvres
+    label: Œuvres
+    type: collection
+    path: content/oeuvres
+    format: yaml
+    fields:
+      - name: titre
+        label: Titre
+        type: string
+        required: true
+      - name: technique
+        label: Technique / support
+        type: text
+      - name: dimensions
+        label: Dimensions
+        type: string
+      - name: annee
+        label: Année
+        type: string
+      - name: prix
+        label: Prix
+        type: string
+      - name: vendu
+        label: Vendu
+        type: boolean
+      - name: photo_principale
+        label: Photo principale
+        type: image
+      - name: photos_details
+        label: Photos de détail
+        type: image
+        options:
+          multiple:
+            max: 12
+      - name: description
+        label: Petit commentaire
+        type: text
