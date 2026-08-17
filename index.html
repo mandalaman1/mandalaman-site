@@ -1,1 +1,28 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mandalaman — test Pages CMS</title><style>body{margin:0;background:#080806;color:#eee2bf;font-family:Georgia,serif}main{max-width:850px;margin:10vh auto;padding:35px;border:1px solid #9b762b}small{color:#d4a73d;letter-spacing:.2em}h1{font-weight:400;font-size:42px}p{line-height:1.6;color:#c9c0aa}.note{margin-top:30px;padding:18px;background:#11100c}</style></head><body><main><small>MANDALAMAN · TEST TECHNIQUE</small><h1>Trappe d’alimentation</h1><p>Cette page n’est pas le futur design du site. Elle sert uniquement à vérifier que Pages CMS peut créer et modifier des fiches d’œuvres dans GitHub.</p><div class="note">Premier cobaye : <strong>État intermédiaire</strong>.</div></main></body></html>
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Galerie / Vente | Mandalaman</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#070706;color:#eee4c9;font-family:Georgia,serif}
+header{padding:18px 4vw;border-bottom:1px solid #99732c66;display:flex;justify-content:space-between;gap:24px;align-items:center;background:#070706ef}
+.brand{color:#f0d274;font-size:19px}nav{display:flex;gap:20px;flex-wrap:wrap}nav a{color:#eee4c9;text-decoration:none;font-size:12px}.on{color:#f0d274!important}
+.intro{text-align:center;margin:46px auto 30px;width:92vw}.intro small{color:#d5a641;letter-spacing:.25em}
+h1{font-size:46px;font-weight:400;color:#f5e5b4;margin:10px}.intro p{font:13px Arial;color:#999}
+.grid{width:min(1180px,92vw);margin:35px auto 70px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.card{border:1px solid #80612366;background:#0c0b08}.pic{height:390px;display:flex;background:#020202;align-items:center;justify-content:center;overflow:hidden}
+.pic img{width:100%;height:100%;object-fit:contain}.txt{padding:18px}h2{font-size:24px;font-weight:400;color:#f1dfad;margin:0 0 8px}
+.meta,.tech{font:13px Arial;color:#aaa18e}.tech{font-size:12px;line-height:1.45}.row{display:flex;justify-content:space-between;gap:12px;align-items:end;margin-top:17px}
+.price{font-size:21px;color:#e5bd59}.status{font:9px Arial;letter-spacing:.1em;color:#bca66d}.empty{grid-column:1/-1;text-align:center;padding:80px 20px;color:#9b927f;font:14px Arial}
+@media(max-width:900px){header{flex-direction:column;align-items:flex-start}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:580px){.grid{grid-template-columns:1fr}.pic{height:65vh;max-height:480px}h1{font-size:38px}}
+</style></head>
+<body><header><div class="brand">✦ PATRICK DUVAL <i>Mandalaman</i></div><nav>
+<a>ACCUEIL</a><a>CHRONOBIO</a><a>CONTACT</a><a>VIDÉOS</a><a class="on">GALERIE/VENTE</a><a>ARTICLES ET VISIONS</a><a>LIVRE D'OR</a>
+</nav></header>
+<section class="intro"><small>ŒUVRES</small><h1>Galerie / Vente</h1><p>Alimentation automatique depuis Pages CMS.</p></section>
+<main id="gallery" class="grid"><div class="empty">Chargement…</div></main>
+<script>
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+fetch('data/oeuvres.json',{cache:'no-store'}).then(r=>r.json()).then(list=>{
+ const g=document.getElementById('gallery');
+ g.innerHTML=list.length?list.map(o=>`<article class="card"><div class="pic">${o.photo_principale?`<img src="${o.photo_principale}" alt="${esc(o.titre)}">`:''}</div><div class="txt"><h2>${esc(o.titre)}</h2><p class="meta">${esc(o.dimensions||'')}${o.annee?' · '+esc(o.annee):''}</p>${o.technique?`<p class="tech">${esc(o.technique)}</p>`:''}<div class="row"><span class="price">${esc(o.prix||'')}</span><span class="status">${o.vendu?'VENDU':'DISPONIBLE'}</span></div></div></article>`).join(''):'<div class="empty">Aucune œuvre publiée.</div>';
+}).catch(()=>document.getElementById('gallery').innerHTML='<div class="empty">Les données n’ont pas encore été générées.</div>');
+</script></body></html>
