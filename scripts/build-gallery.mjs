@@ -77,7 +77,7 @@ function analyserFiche(contenu) {
 
 const fichiers = fs
   .readdirSync(dossierSource)
-  .filter(fichier => /\.(md|yml|yaml)$/i.test(fichier))
+  .filter(fichier => /\.md$/i.test(fichier))
   .sort();
 
 const oeuvres = [];
