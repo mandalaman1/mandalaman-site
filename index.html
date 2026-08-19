@@ -415,7 +415,7 @@ function renderDetail(o){
         <div>
           <div class="detail-main">
             ${o.photo_principale
-              ? `<img src="${esc(o.photo_principale)}" alt="${esc(o.titre)}">`
+            ? `<img src="${esc(o.photo_principale)}" alt="${esc(o.titre)}" onclick="ouvrirLightbox(this.src)" style="cursor:zoom-in">`
               : ""}
           </div>
 
@@ -425,7 +425,7 @@ function renderDetail(o){
                 <img
                   src="${esc(photo)}"
                   alt="Détail de ${esc(o.titre)}"
-                  onclick="window.open(this.src,'_blank')"
+                 onclick="ouvrirLightbox(this.src)"
                 >
               `).join("")}
             </div>
@@ -503,6 +503,87 @@ fetch("data/oeuvres.json",{cache:"no-store"})
       </div>
     `;
   });
+</script>
+
+  <div id="lightbox" class="lightbox" onclick="fermerLightbox()">
+  <button class="lightbox-close" onclick="event.stopPropagation(); fermerLightbox()">×</button>
+  <img id="lightbox-image" src="" alt="" onclick="event.stopPropagation(); zoomLightbox(this)">
+</div>
+
+<style>
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,.96);
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  padding: 30px;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 95vw;
+  max-height: 92vh;
+  width: auto;
+  height: auto;
+  cursor: zoom-in;
+  transition: transform .2s ease;
+}
+
+.lightbox img.zoomed {
+  transform: scale(2);
+  cursor: zoom-out;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  z-index: 10000;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid #c99a3c;
+  background: #080806;
+  color: #f0d274;
+  font-size: 30px;
+  cursor: pointer;
+}
+</style>
+
+<script>
+function ouvrirLightbox(src) {
+  const box = document.getElementById("lightbox");
+  const img = document.getElementById("lightbox-image");
+
+  img.src = src;
+  img.classList.remove("zoomed");
+  box.classList.add("open");
+}
+
+function fermerLightbox() {
+  const box = document.getElementById("lightbox");
+  const img = document.getElementById("lightbox-image");
+
+  box.classList.remove("open");
+  img.classList.remove("zoomed");
+}
+
+function zoomLightbox(img) {
+  img.classList.toggle("zoomed");
+}
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") {
+    fermerLightbox();
+  }
+});
 </script>
 
 </body>
