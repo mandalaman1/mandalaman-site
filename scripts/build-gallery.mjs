@@ -1,7 +1,131 @@
-import fs from 'node:fs';import path from 'node:path';
-const dirs=['contenu/oeuvres','content/oeuvres'];const source=dirs.find(d=>fs.existsSync(d));
-if(!source){console.error('Dossier œuvres introuvable');process.exit(1);}
-const parse=s=>{const o={};for(const raw of s.split(/\r?\n/)){const line=raw.trim();if(!line||line==='---'||line.startsWith('#'))continue;const i=line.indexOf(':');if(i<1)continue;const k=line.slice(0,i).trim();let v=line.slice(i+1).trim().replace(/^["']|["']$/g,'');if(v==='true')v=true;if(v==='false')v=false;o[k]=v;}return o;};
-const files=fs.readdirSync(source).filter(f=>/\.(md|ya?ml)$/i.test(f));const out=[];
-for(const f of files){const d=parse(fs.readFileSync(path.join(source,f),'utf8'));if(!d.titre)continue;if(!d.photo_principale&&files.some(x=>x.endsWith('.md'))&&!f.endsWith('.md'))continue;out.push({titre:d.titre||'',technique:d.technique||'',dimensions:d.dimensions||'',annee:d.annee||'',prix:d.prix||'',vendu:d.vendu===true||d.vendu==='true',photo_principale:d.photo_principale||'',description:d.description||''});}
-fs.mkdirSync('data',{recursive:true});fs.writeFileSync('data/oeuvres.json',JSON.stringify(out,null,2));console.log(`Galerie générée: ${out.length} œuvre(s)`);
+import fs from "node:fs";
+import path from "node:path";
+
+const dossiersPossibles = [
+  "contenu/oeuvres",
+  "content/oeuvres"
+];
+
+const dossierSource = dossiersPossibles.find(dossier =>
+  fs.existsSync(dossier)
+);
+
+if (!dossierSource) {
+  console.error("Dossier des œuvres introuvable.");
+  process.exit(1);
+}
+
+function nettoyerValeur(valeur = "") {
+  valeur = valeur.trim();
+
+  if (
+    (valeur.startsWith('"') && valeur.endsWith('"')) ||
+    (valeur.startsWith("'") && valeur.endsWith("'"))
+  ) {
+    valeur = valeur.slice(1, -1);
+  }
+
+  if (valeur === "true") return true;
+  if (valeur === "false") return false;
+
+  return valeur;
+}
+
+function analyserFiche(contenu) {
+  const donnees = {};
+  const lignes = contenu.split(/\r?\n/);
+
+  let listeEnCours = null;
+
+  for (const ligneBrute of lignes) {
+    const ligne = ligneBrute.trim();
+
+    if (!ligne || ligne === "---" || ligne.startsWith("#")) {
+      continue;
+    }
+
+    /* élément d'une liste, par exemple photos_details */
+    if (ligne.startsWith("- ") && listeEnCours) {
+      donnees[listeEnCours].push(
+        nettoyerValeur(ligne.slice(2))
+      );
+      continue;
+    }
+
+    const position = ligne.indexOf(":");
+
+    if (position < 1) {
+      continue;
+    }
+
+    const cle = ligne.slice(0, position).trim();
+    const valeur = ligne.slice(position + 1).trim();
+
+    /* clé suivie d'une liste */
+    if (valeur === "") {
+      donnees[cle] = [];
+      listeEnCours = cle;
+      continue;
+    }
+
+    listeEnCours = null;
+    donnees[cle] = nettoyerValeur(valeur);
+  }
+
+  return donnees;
+}
+
+const fichiers = fs
+  .readdirSync(dossierSource)
+  .filter(fichier => /\.(md|yml|yaml)$/i.test(fichier))
+  .sort();
+
+const oeuvres = [];
+
+for (const fichier of fichiers) {
+  const chemin = path.join(dossierSource, fichier);
+
+  const donnees = analyserFiche(
+    fs.readFileSync(chemin, "utf8")
+  );
+
+  if (!donnees.titre) {
+    continue;
+  }
+
+  oeuvres.push({
+    titre: donnees.titre || "",
+    technique: donnees.technique || "",
+    dimensions: donnees.dimensions || "",
+    annee: donnees.annee || "",
+    prix: donnees.prix || "",
+    vendu:
+      donnees.vendu === true ||
+      donnees.vendu === "true",
+
+    photo_principale:
+      donnees.photo_principale || "",
+
+    photos_details:
+      Array.isArray(donnees.photos_details)
+        ? donnees.photos_details
+        : [],
+
+    description:
+      donnees.description || ""
+  });
+}
+
+fs.mkdirSync("data", {
+  recursive: true
+});
+
+fs.writeFileSync(
+  "data/oeuvres.json",
+  JSON.stringify(oeuvres, null, 2),
+  "utf8"
+);
+
+console.log(
+  `Galerie générée : ${oeuvres.length} œuvre(s)`
+);
