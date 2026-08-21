@@ -305,10 +305,109 @@ nav a.active{
     height:auto;
   }
 }
+
+/* ===== CADRE MANDALAMAN VALIDÉ ===== */
+body{
+  position:relative;
+  background:
+    linear-gradient(rgba(4,5,3,.42),rgba(4,5,3,.58)),
+    #070706;
+}
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  pointer-events:none;
+  z-index:9000;
+}
+body::before{
+  inset:10px;
+  border:1px solid rgba(216,179,88,.86);
+}
+body::after{
+  inset:17px;
+  border:1px solid rgba(216,179,88,.30);
+}
+.mandala-frame-piece{
+  position:fixed;
+  z-index:9001;
+  pointer-events:none;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+}
+.mandala-corner{
+  width:58px;
+  height:58px;
+  background-image:url("images/decor/corner.png");
+}
+.mandala-tl{left:9px;top:9px}
+.mandala-tr{right:9px;top:9px;transform:scaleX(-1)}
+.mandala-bl{left:9px;bottom:9px;transform:scaleY(-1)}
+.mandala-br{right:9px;bottom:9px;transform:scale(-1)}
+
+.mandala-separator{
+  background-image:url("images/decor/separator.png");
+}
+.mandala-sep-top,
+.mandala-sep-bottom{
+  left:50%;
+  width:150px;
+  height:34px;
+}
+.mandala-sep-top{top:-6px;transform:translateX(-50%)}
+.mandala-sep-bottom{bottom:-6px;transform:translateX(-50%) scaleY(-1)}
+.mandala-sep-left,
+.mandala-sep-right{
+  top:50%;
+  width:34px;
+  height:150px;
+}
+.mandala-sep-left{left:-6px;transform:translateY(-50%) rotate(90deg)}
+.mandala-sep-right{right:-6px;transform:translateY(-50%) rotate(-90deg)}
+
+header{
+  margin:18px 28px 0;
+  background:rgba(7,7,6,.72);
+}
+.intro{
+  text-align:left;
+  padding:30px 34px;
+  background:rgba(4,7,4,.88);
+  border:1px solid rgba(216,179,88,.35);
+  border-left-color:rgba(216,179,88,.78);
+}
+.gallery{
+  padding:20px;
+  background:rgba(3,6,3,.88);
+  border:1px solid rgba(216,179,88,.42);
+}
+.detail{
+  padding:20px;
+  background:rgba(3,6,3,.82);
+  border:1px solid rgba(216,179,88,.34);
+}
+@media(max-width:580px){
+  .mandala-corner{width:42px;height:42px}
+  .mandala-sep-top,.mandala-sep-bottom{width:105px;height:28px}
+  .mandala-sep-left,.mandala-sep-right{width:28px;height:105px}
+  header{margin:12px 18px 0}
+}
+
 </style>
 </head>
 
 <body>
+
+<div class="mandala-frame-piece mandala-corner mandala-tl"></div>
+<div class="mandala-frame-piece mandala-corner mandala-tr"></div>
+<div class="mandala-frame-piece mandala-corner mandala-bl"></div>
+<div class="mandala-frame-piece mandala-corner mandala-br"></div>
+<div class="mandala-frame-piece mandala-separator mandala-sep-top"></div>
+<div class="mandala-frame-piece mandala-separator mandala-sep-bottom"></div>
+<div class="mandala-frame-piece mandala-separator mandala-sep-left"></div>
+<div class="mandala-frame-piece mandala-separator mandala-sep-right"></div>
+
 
 <header>
   <div class="brand">✦ PATRICK DUVAL <i>Mandalaman</i></div>
