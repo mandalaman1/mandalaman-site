@@ -425,6 +425,39 @@ body::after{bottom:17px}
   .mandala-sep-right{right:-39px}
 }
 
+
+/* Correction finale de hauteur : le cadre suit toute la page */
+html,body{min-height:100%}
+body{position:relative;min-height:100vh;padding-bottom:18px}
+
+/* Les deux filets couvrent toute la hauteur réelle du document */
+body::before,
+body::after{
+  top:10px;
+  bottom:10px;
+  height:auto;
+}
+body::after{
+  top:17px;
+  bottom:17px;
+}
+
+/* Les pièces du haut restent en haut du document */
+.mandala-tl,.mandala-tr,.mandala-sep-top{position:absolute}
+
+/* Les pièces du bas se collent au vrai bas du document */
+.mandala-bl,.mandala-br,.mandala-sep-bottom{position:absolute}
+
+/* Les séparateurs latéraux sont centrés sur la hauteur totale de la page */
+.mandala-sep-left,
+.mandala-sep-right{
+  position:absolute;
+  top:50%;
+}
+
+/* Donne au document une hauteur correspondant réellement à son contenu */
+#app{position:relative;min-height:calc(100vh - 56px)}
+
 </style>
 </head>
 
