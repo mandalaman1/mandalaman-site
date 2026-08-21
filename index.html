@@ -316,7 +316,7 @@ body{
 body::before,
 body::after{
   content:"";
-  position:fixed;
+  position:absolute;
   pointer-events:none;
   z-index:9000;
 }
@@ -329,7 +329,7 @@ body::after{
   border:1px solid rgba(216,179,88,.30);
 }
 .mandala-frame-piece{
-  position:fixed;
+  position:absolute;
   z-index:9001;
   pointer-events:none;
   background-repeat:no-repeat;
@@ -392,6 +392,37 @@ header{
   .mandala-sep-top,.mandala-sep-bottom{width:105px;height:28px}
   .mandala-sep-left,.mandala-sep-right{width:28px;height:105px}
   header{margin:12px 18px 0}
+}
+
+
+/* Correction 21-08 : cadre lié à la page, séparateurs latéraux lisibles */
+html{min-height:100%}
+body{min-height:100vh}
+body::before,body::after{bottom:10px}
+body::after{bottom:17px}
+
+/* Même présence visuelle sur les quatre côtés */
+.mandala-sep-left,
+.mandala-sep-right{
+  width:150px;
+  height:34px;
+  top:50%;
+}
+.mandala-sep-left{
+  left:-64px;
+  transform:translateY(-50%) rotate(90deg);
+}
+.mandala-sep-right{
+  right:-64px;
+  transform:translateY(-50%) rotate(-90deg);
+}
+@media(max-width:580px){
+  .mandala-sep-left,.mandala-sep-right{
+    width:105px;
+    height:28px;
+  }
+  .mandala-sep-left{left:-39px}
+  .mandala-sep-right{right:-39px}
 }
 
 </style>
