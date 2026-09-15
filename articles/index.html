@@ -1,0 +1,52 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Articles & Visions — Mandalaman</title>
+<style>
+:root{--gold:#d8b358;--cream:#f2dfae;--ink:#100d0a}*{box-sizing:border-box}body{margin:0;color:#f7ecd0;font-family:Georgia,'Times New Roman',serif;background:#17110b url('images/fond-articles.jpg') center/cover fixed no-repeat;min-height:100vh}body:before{content:"";position:fixed;inset:0;background:rgba(10,7,4,.55);z-index:-1}.frame{position:fixed;inset:14px;pointer-events:none;z-index:20}.h,.v{display:none!important}
+
+/* Ornements inchangés */
+.coin{position:absolute;width:126px;height:126px;object-fit:contain}
+.tl{left:-3px;top:-3px}
+.tr{right:-3px;top:-3px;transform:scaleX(-1)}
+.bl{left:-3px;bottom:-3px;transform:scaleY(-1)}
+.br{right:-3px;bottom:-3px;transform:scale(-1)}
+
+.sep{position:absolute;width:54px;height:54px;object-fit:contain}
+.st{top:-16px;left:50%;transform:translateX(-50%)}
+.sb{bottom:-16px;left:50%;transform:translateX(-50%)}
+.sl{left:-22px;top:50%;transform:translateY(-50%)}
+.sr{right:-22px;top:50%;transform:translateY(-50%)}header{text-align:center;padding:70px 28px 28px}h1{margin:0;color:var(--cream);font-size:clamp(32px,5vw,58px);font-weight:400;text-shadow:0 2px 8px #000}.intro{margin:12px auto 0;max-width:680px;font-style:italic;color:#dfc98e}.list{width:min(930px,calc(100% - 76px));margin:15px auto 90px;display:grid;gap:22px}.card{display:grid;grid-template-columns:180px 1fr;min-height:175px;background:rgba(18,12,8,.82);border:1px solid rgba(216,179,88,.48);box-shadow:0 10px 30px rgba(0,0,0,.35);cursor:pointer;overflow:hidden}.thumb{background:rgba(216,179,88,.12) center/cover no-repeat;min-height:175px}.copy{padding:25px 30px}.copy h2{margin:0 0 6px;color:#efd99e;font-weight:400}.date{font-size:.78rem;color:#c6aa65}.copy p{line-height:1.55;color:#eee0bd}.read{color:var(--gold);font-size:.9rem}.article{display:none;width:min(850px,calc(100% - 76px));margin:45px auto 100px;background:rgba(18,12,8,.88);border:1px solid rgba(216,179,88,.5);padding:clamp(28px,5vw,60px);box-shadow:0 10px 35px #000}.article h1{font-size:clamp(30px,5vw,48px)}.article .body{white-space:pre-wrap;line-height:1.75;font-size:1.08rem;margin-top:30px}.back{display:inline-block;color:var(--gold);cursor:pointer;margin-bottom:25px}@media(max-width:650px){.card{grid-template-columns:1fr}.thumb{min-height:150px}.list,.article{width:calc(100% - 54px)}.coin{width:92px;height:92px}.h{left:70px;right:70px}.v{top:70px;bottom:70px}}
+</style>
+<style id="global-nav-style">
+.global-nav{
+  position:sticky;top:0;z-index:9999;
+  display:flex;justify-content:center;align-items:center;gap:22px;flex-wrap:wrap;
+  padding:13px 18px;background:transparent;
+  border-bottom:none;
+  backdrop-filter:none;
+}
+.global-nav a{
+  color:#f4ead2;text-decoration:none;font-family:Georgia,"Times New Roman",serif;
+  font-size:.95rem;white-space:nowrap;
+}
+.global-nav a:hover{color:#d8b55b}
+@media(max-width:760px){.global-nav{gap:11px;padding:11px 12px}.global-nav a{font-size:.86rem}}
+</style>
+</head><body>
+<nav class="global-nav">
+  <a href="../index.html">Accueil</a>
+  <a href="../galerie/index.html">Galerie/Vente</a>
+  <a href="../videos/index.html">Vidéos</a>
+  <a href="../chronobio/index.html">Chronobio</a>
+  <a href="../articles/index.html">Articles & Visions</a>
+  <a href="../contact/index.html">Contact</a>
+  <a href="../livre-or/index.html">Livre d’or</a>
+</nav>
+
+<div class="frame"><img class="coin tl" src="images/coin.png"><img class="coin tr" src="images/coin.png"><img class="coin bl" src="images/coin.png"><img class="coin br" src="images/coin.png"><img class="sep st" src="images/separateur.png"><img class="sep sb" src="images/separateur.png"><img class="sep sl" src="images/separateur.png"><img class="sep sr" src="images/separateur.png"></div>
+<header id="head"><h1>Articles &amp; Visions</h1><div class="intro">Quelques textes, réflexions et fragments de parcours, écrits à l'envie.</div></header><main><section class="list" id="list"></section><article class="article" id="article"></article></main>
+<script>
+let all=[];const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+function frDate(d){try{return new Date(d+'T12:00:00').toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})}catch{return d||''}}
+function showList(){history.replaceState(null,'',location.pathname);document.getElementById('head').style.display='block';document.getElementById('article').style.display='none';document.getElementById('list').style.display='grid';scrollTo(0,0)}
+function openArticle(a){history.pushState(null,'','?article='+encodeURIComponent(a.slug));document.getElementById('head').style.display='none';document.getElementById('list').style.display='none';const el=document.getElementById('article');el.style.display='block';el.innerHTML=`<span class="back" onclick="showList()">← Articles & Visions</span><h1>${esc(a.titre)}</h1><div class="date">${esc(frDate(a.date))}</div>${a.image?`<img src="${esc(a.image)}" style="width:100%;max-height:480px;object-fit:cover;margin:28px 0">`:''}<div class="body">${esc(a.texte)}</div>`;scrollTo(0,0)}
+fetch('data/articles.json').then(r=>r.json()).then(data=>{all=data;const list=document.getElementById('list');list.innerHTML=data.map((a,i)=>`<div class="card" data-i="${i}"><div class="thumb" ${a.image?`style="background-image:url('${esc(a.image)}')"`:''}></div><div class="copy"><h2>${esc(a.titre)}</h2><div class="date">${esc(frDate(a.date))}</div><p>${esc(a.extrait||'')}</p><span class="read">Lire l'article →</span></div></div>`).join('');list.onclick=e=>{const c=e.target.closest('.card');if(c)openArticle(data[+c.dataset.i])};const q=new URLSearchParams(location.search).get('article');if(q){const a=data.find(x=>x.slug===q);if(a)openArticle(a)}});addEventListener('popstate',()=>location.reload());
+</script></body></html>

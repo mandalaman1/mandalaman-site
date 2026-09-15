@@ -1,0 +1,33 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Contact · Mandalaman</title><style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Georgia,serif;color:#f3e5bd}body{min-height:100vh;background:linear-gradient(rgba(10,7,4,.34),rgba(10,7,4,.55)),url('images/fond-contact.jpg') center/cover fixed no-repeat}.nav{display:flex;justify-content:center;gap:25px;flex-wrap:wrap;padding:24px 80px;font:14px Arial,sans-serif;letter-spacing:.08em}.nav a{color:#ead39a;text-decoration:none}.wrap{min-height:calc(100vh - 70px);display:grid;place-items:center;padding:50px 28px 80px}.card{width:min(680px,92vw);padding:34px 42px 40px;background:rgba(12,9,7,.68);backdrop-filter:blur(2px);box-shadow:0 14px 45px rgba(0,0,0,.28)}h1{text-align:center;font-weight:normal;letter-spacing:.08em;margin:0 0 8px;color:#e0bd69}p.intro{text-align:center;margin:0 0 28px;color:#eadfca}label{display:block;margin:16px 0 7px;font-size:14px}input,textarea{width:100%;border:1px solid rgba(224,189,105,.55);background:rgba(0,0,0,.35);color:#fff;padding:12px;font:16px Georgia,serif;outline:none}textarea{min-height:160px;resize:vertical}button{display:block;margin:24px auto 0;padding:11px 27px;border:1px solid #d8b55b;background:rgba(216,181,91,.12);color:#f3dfaa;font:15px Georgia,serif;cursor:pointer}.corner{position:fixed;width:190px;height:auto;z-index:4;pointer-events:none}.tl{top:13px;left:13px}.tr{top:13px;right:13px;transform:scaleX(-1)}.bl{bottom:13px;left:13px;transform:scaleY(-1)}.br{bottom:13px;right:13px;transform:scale(-1)}@media(max-width:700px){.corner{width:120px}.nav{padding:22px 55px;gap:14px}.card{padding:28px 22px}.wrap{padding-top:35px}}
+</style>
+<style id="global-nav-style">
+.global-nav{
+  position:sticky;top:0;z-index:9999;
+  display:flex;justify-content:center;align-items:center;gap:22px;flex-wrap:wrap;
+  padding:13px 18px;background:transparent;
+  border-bottom:none;
+  backdrop-filter:none;
+}
+.global-nav a{
+  color:#f4ead2;text-decoration:none;font-family:Georgia,"Times New Roman",serif;
+  font-size:.95rem;white-space:nowrap;
+}
+.global-nav a:hover{color:#d8b55b}
+@media(max-width:760px){.global-nav{gap:11px;padding:11px 12px}.global-nav a{font-size:.86rem}}
+</style>
+</head><body>
+<nav class="global-nav">
+  <a href="../index.html">Accueil</a>
+  <a href="../galerie/index.html">Galerie/Vente</a>
+  <a href="../videos/index.html">Vidéos</a>
+  <a href="../chronobio/index.html">Chronobio</a>
+  <a href="../articles/index.html">Articles & Visions</a>
+  <a href="../contact/index.html">Contact</a>
+  <a href="../livre-or/index.html">Livre d’or</a>
+</nav>
+
+<img class="corner tl" src="images/coin.png"><img class="corner tr" src="images/coin.png"><img class="corner bl" src="images/coin.png"><img class="corner br" src="images/coin.png">
+
+<main class="wrap"><section class="card"><h1>Contact</h1><p class="intro">Pour une exposition, une œuvre, une rencontre ou simplement un message.</p><form onsubmit="event.preventDefault();alert('Maquette : le formulaire sera relié à Formspree lors de l’intégration au site.');"><label>Nom</label><input required name="nom"><label>E-mail</label><input required type="email" name="email"><label>Message</label><textarea required name="message"></textarea><button type="submit">Envoyer</button></form></section></main>
+</body></html>
