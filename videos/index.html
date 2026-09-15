@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vidéos | Mandalaman</title>
+<style>
+:root{
+  --gold:#d6b35e;
+  --gold2:#a97e31;
+  --cream:#eee4c9;
+  --panel:rgba(7,9,7,.84);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  color:var(--cream);
+  font-family:Georgia,"Times New Roman",serif;
+  background:
+    linear-gradient(rgba(4,5,3,.40),rgba(4,5,3,.60)),
+    url("images/fonds/fond-videos.jpg") center top/cover fixed no-repeat,
+    #070706;
+  padding:18px;
+}
+.page{
+  position:relative;
+  min-height:calc(100vh - 36px);
+  border:none;
+  box-shadow:inset 0 0 0 8px rgba(214,179,94,.14);
+  padding:22px 30px 58px;
+}
+
+/* Décor Vidéos différent de Galerie/Vente */
+.corner{
+  position:absolute;
+  width:78px;
+  height:78px;
+  background:url("images/decor/corner-raccord.png") center/contain no-repeat;
+  opacity:.78;
+  pointer-events:none;
+}
+.c1{left:-9.90px;top:-10.47px}
+.c2{right:-9.90px;top:-10.47px;transform:scaleX(-1)}
+.c3{left:-9.90px;bottom:-10.47px;transform:scaleY(-1)}
+.c4{right:-9.90px;bottom:-10.47px;transform:scale(-1)}
+.midorn{
+  position:absolute;
+  left:50%;
+  width:170px;
+  height:44px;
+  background:url("images/decor/mid.png") center/contain no-repeat;
+  opacity:.68;
+  pointer-events:none;
+}
+.mt{top:-8px;transform:translateX(-50%)}
+.mb{bottom:-8px;transform:translateX(-50%) scaleY(-1)}
+
+
+.frame-line{position:absolute;background:rgba(216,179,88,.86);pointer-events:none;z-index:2}
+.ftl,.ftr,.fbl,.fbr{height:1px}
+.flt,.flb,.frt,.frb{width:1px}
+.ftl{top:14px;left:72px;right:calc(50% + 92px)}
+.ftr{top:14px;left:calc(50% + 92px);right:72px}
+.fbl{bottom:14px;left:72px;right:calc(50% + 92px)}
+.fbr{bottom:14px;left:calc(50% + 92px);right:72px}
+.flt{left:14px;top:72px;bottom:calc(50% + 92px)}
+.flb{left:14px;top:calc(50% + 92px);bottom:72px}
+.frt{right:14px;top:72px;bottom:calc(50% + 92px)}
+.frb{right:14px;top:calc(50% + 92px);bottom:72px}
+
+.sideorn{
+  position:absolute;
+  width:170px;
+  height:44px;
+  background:url("images/decor/mid.png") center/contain no-repeat;
+  opacity:.68;
+  pointer-events:none;
+  z-index:3;
+  top:50%;
+}
+.ml{left:14px;transform:translate(-50%,-50%) rotate(90deg)}
+.mr{right:14px;transform:translate(50%,-50%) rotate(90deg)}
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:24px;
+  padding:10px 16px 17px;
+  border-bottom:1px solid rgba(183,141,56,.42);
+  background:rgba(7,7,6,.64);
+}
+.brand{color:#f0d274;font-size:20px;white-space:nowrap}
+.brand i{font-weight:normal}
+nav{
+  display:flex;
+  gap:22px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+nav a{
+  color:#eee4c9;
+  text-decoration:none;
+  font:12px Arial,sans-serif;
+}
+nav a.active{
+  color:#f0d274;
+  border-bottom:1px solid #bd9037;
+  padding-bottom:5px;
+}
+.intro{
+  max-width:1180px;
+  margin:42px auto 28px;
+  padding:26px 30px;
+  background:rgba(4,7,4,.80);
+  border:1px solid rgba(214,179,94,.36);
+}
+.intro small{color:#d5a641;letter-spacing:.28em}
+.intro h1{
+  color:#f5e5b4;
+  font-size:44px;
+  font-weight:400;
+  margin:8px 0 5px;
+}
+.intro p{
+  margin:0;
+  max-width:670px;
+  color:#d6ccb5;
+  font:14px/1.55 Arial,sans-serif;
+}
+.video-grid{
+  max-width:1180px;
+  margin:auto;
+  padding:24px;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:28px;
+  background:rgba(3,6,3,.82);
+  border:1px solid rgba(214,179,94,.42);
+}
+.video-card{
+  border:1px solid rgba(197,151,57,.52);
+  background:rgba(5,5,4,.92);
+  padding:10px;
+  cursor:pointer;
+  transition:transform .18s ease,border-color .18s ease;
+}
+.video-card:hover{
+  transform:translateY(-3px);
+  border-color:#d0a348;
+}
+.thumb{
+  position:relative;
+  aspect-ratio:9/16;
+  overflow:hidden;
+  background:#000;
+}
+.thumb video{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  pointer-events:none;
+}
+.play{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(5,5,4,.62);
+  border:1px solid rgba(214,179,94,.82);
+  color:#f0d274;
+  font:24px Arial,sans-serif;
+}
+.caption{
+  padding:12px 4px 4px;
+  color:#cdbb8d;
+  font:11px Arial,sans-serif;
+  letter-spacing:.12em;
+}
+
+/* Grand lecteur */
+.viewer{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:rgba(0,0,0,.94);
+  align-items:center;
+  justify-content:center;
+  padding:28px 70px;
+}
+.viewer.open{display:flex}
+.viewer-shell{
+  position:relative;
+  width:min(430px,82vw);
+  max-height:92vh;
+}
+.viewer video{
+  display:block;
+  width:100%;
+  max-height:88vh;
+  aspect-ratio:9/16;
+  object-fit:contain;
+  background:#000;
+  border:1px solid rgba(214,179,94,.72);
+}
+.close,.navbtn{
+  position:fixed;
+  z-index:10000;
+  border:1px solid rgba(214,179,94,.75);
+  background:rgba(7,7,6,.76);
+  color:#f0d274;
+  cursor:pointer;
+}
+.close{
+  top:20px;
+  right:22px;
+  width:46px;height:46px;
+  border-radius:50%;
+  font-size:30px;
+}
+.navbtn{
+  top:50%;
+  transform:translateY(-50%);
+  width:50px;height:70px;
+  font-size:32px;
+}
+.prev{left:18px}
+.next{right:18px}
+.counter{
+  text-align:center;
+  margin-top:10px;
+  color:#d4c49b;
+  font:11px Arial,sans-serif;
+  letter-spacing:.12em;
+}
+@media(max-width:850px){
+  header{flex-direction:column;align-items:flex-start}
+  nav{justify-content:flex-start}
+  .video-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  body{padding:9px}
+  .page{padding:18px 12px 44px}
+  .corner{width:64px;height:64px}
+  .midorn{width:140px;height:38px}
+  .video-grid{grid-template-columns:1fr}
+  .intro h1{font-size:36px}
+  .viewer{padding:26px 45px}
+  .navbtn{width:38px;height:58px}
+  .prev{left:4px}.next{right:4px}
+}
+</style>
+
+<style id="global-nav-style">
+.global-nav{
+  position:sticky;top:0;z-index:9999;
+  display:flex;justify-content:center;align-items:center;gap:22px;flex-wrap:wrap;
+  padding:13px 18px;background:transparent;
+  border-bottom:none;
+  backdrop-filter:none;
+}
+.global-nav a{
+  color:#f4ead2;text-decoration:none;font-family:Georgia,"Times New Roman",serif;
+  font-size:.95rem;white-space:nowrap;
+}
+.global-nav a:hover{color:#d8b55b}
+@media(max-width:760px){.global-nav{gap:11px;padding:11px 12px}.global-nav a{font-size:.86rem}}
+</style>
+</head>
+<body>
+<nav class="global-nav">
+  <a href="../index.html">Accueil</a>
+  <a href="../galerie/index.html">Galerie/Vente</a>
+  <a href="../videos/index.html">Vidéos</a>
+  <a href="../chronobio/index.html">Chronobio</a>
+  <a href="../articles/index.html">Articles & Visions</a>
+  <a href="../contact/index.html">Contact</a>
+  <a href="../livre-or/index.html">Livre d’or</a>
+</nav>
+
+<div class="page">
+  <div class="frame-line ftl"></div><div class="frame-line ftr"></div>
+  <div class="frame-line fbl"></div><div class="frame-line fbr"></div>
+  <div class="frame-line flt"></div><div class="frame-line flb"></div>
+  <div class="frame-line frt"></div><div class="frame-line frb"></div>
+  <div class="corner c1"></div><div class="corner c2"></div>
+  <div class="corner c3"></div><div class="corner c4"></div>
+  <div class="midorn mt"></div><div class="midorn mb"></div>
+  <div class="sideorn ml"></div><div class="sideorn mr"></div>
+
+  <header>
+    <div class="brand">✦ PATRICK DUVAL <i>Mandalaman</i></div>
+    
+  </header>
+
+  <section class="intro">
+    <small>IMAGES EN MOUVEMENT</small>
+    <h1>Vidéos</h1>
+    <p>Cliquez sur une vignette pour ouvrir le grand lecteur, puis utilisez les flèches pour passer d’une vidéo à l’autre.</p>
+  </section>
+
+  <main class="video-grid">
+    <article class="video-card" onclick="openViewer(0)">
+      <div class="thumb"><video muted playsinline preload="metadata" src="videos/video-01.mp4"></video><div class="play">▶</div></div>
+      <div class="caption">VIDÉO 01</div>
+    </article>
+    <article class="video-card" onclick="openViewer(1)">
+      <div class="thumb"><video muted playsinline preload="metadata" src="videos/video-02.mp4"></video><div class="play">▶</div></div>
+      <div class="caption">VIDÉO 02</div>
+    </article>
+    <article class="video-card" onclick="openViewer(2)">
+      <div class="thumb"><video muted playsinline preload="metadata" src="videos/video-03.mp4"></video><div class="play">▶</div></div>
+      <div class="caption">VIDÉO 03</div>
+    </article>
+  </main>
+</div>
+
+<div id="viewer" class="viewer" onclick="closeViewer()">
+  <button class="close" onclick="event.stopPropagation();closeViewer()">×</button>
+  <button class="navbtn prev" onclick="event.stopPropagation();changeVideo(-1)">‹</button>
+  <div class="viewer-shell" onclick="event.stopPropagation()">
+    <video id="viewerVideo" controls playsinline></video>
+    <div id="counter" class="counter"></div>
+  </div>
+  <button class="navbtn next" onclick="event.stopPropagation();changeVideo(1)">›</button>
+</div>
+
+<script>
+const videos=["videos/video-01.mp4","videos/video-02.mp4","videos/video-03.mp4"];
+let current=0;
+const viewer=document.getElementById("viewer");
+const player=document.getElementById("viewerVideo");
+const counter=document.getElementById("counter");
+
+function showCurrent(){
+  player.src=videos[current];
+  counter.textContent=`${current+1} / ${videos.length}`;
+  player.play().catch(()=>{});
+}
+function openViewer(i){
+  current=i;
+  viewer.classList.add("open");
+  showCurrent();
+}
+function closeViewer(){
+  player.pause();
+  viewer.classList.remove("open");
+}
+function changeVideo(step){
+  current=(current+step+videos.length)%videos.length;
+  showCurrent();
+}
+document.addEventListener("keydown",e=>{
+  if(!viewer.classList.contains("open")) return;
+  if(e.key==="Escape") closeViewer();
+  if(e.key==="ArrowLeft") changeVideo(-1);
+  if(e.key==="ArrowRight") changeVideo(1);
+});
+</script>
+</body>
+</html>
