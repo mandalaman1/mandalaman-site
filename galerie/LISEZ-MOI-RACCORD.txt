@@ -1,0 +1,1 @@
+Test du raccord Pages CMS -> Galerie. Plus tard sur Cloudflare Pages: commande de build = npm run build ; dossier de sortie = racine.

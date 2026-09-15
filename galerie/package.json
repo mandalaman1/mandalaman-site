@@ -1,0 +1,1 @@
+{"name":"mandalaman-site","private":true,"type":"module","scripts":{"build":"node scripts/build-gallery.mjs"}}
