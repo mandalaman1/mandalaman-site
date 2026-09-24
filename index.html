@@ -132,13 +132,21 @@ document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>nav
 
 const slides=[...document.querySelectorAll('.hero-slide')];
 const slideCurrent=document.getElementById('slideCurrent');
+const slidePrev=document.getElementById('slidePrev');
+const slideNext=document.getElementById('slideNext');
 let slideIndex=0;
-setInterval(()=>{
+
+function showSlide(index){
   slides[slideIndex].classList.remove('active');
-  slideIndex=(slideIndex+1)%slides.length;
+  slideIndex=(index+slides.length)%slides.length;
   slides[slideIndex].classList.add('active');
   slideCurrent.textContent=String(slideIndex+1).padStart(2,'0');
-}, 4000);
+}
+
+slidePrev.addEventListener('click',()=>showSlide(slideIndex-1));
+slideNext.addEventListener('click',()=>showSlide(slideIndex+1));
+
+setInterval(()=>showSlide(slideIndex+1),4000);
 
 </script>
 
