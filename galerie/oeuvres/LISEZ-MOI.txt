@@ -1,0 +1,9 @@
+GALERIE / VENTE — AJOUTER UNE ŒUVRE
+
+1. Dans galerie/oeuvres/, créez un dossier portant le nom de l’œuvre (sans accents de préférence).
+2. Placez toutes les photos de l’œuvre dans ce même dossier.
+3. Renommez UNE SEULE photo principale.jpg (ou principale.jpeg/png/webp).
+4. Toutes les autres images du dossier sont automatiquement considérées comme photos de détail, quel que soit leur nom.
+5. Ajoutez fiche.json avec uniquement les références de l’œuvre.
+
+Aucun chemin de photo n’est à écrire dans fiche.json.

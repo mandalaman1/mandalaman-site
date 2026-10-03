@@ -1,0 +1,17 @@
+[
+  {
+    "titre": "Lunaison",
+    "technique": "Tech peinture relief sur bois flotté",
+    "dimensions": "30X25",
+    "annee": "2026",
+    "prix": "80€",
+    "vendu": false,
+    "photo_principale": "oeuvres/lunaison/../../images/oeuvres/p1010313-1.jpg",
+    "photos_details": [
+      "oeuvres/lunaison/../../images/oeuvres/p1010314.jpg",
+      "oeuvres/lunaison/../../images/oeuvres/p1010315.jpg"
+    ],
+    "description": "",
+    "slug": "lunaison"
+  }
+]

@@ -484,6 +484,28 @@ body{
 .global-nav a:hover{color:#d8b55b}
 @media(max-width:760px){.global-nav{gap:11px;padding:11px 12px}.global-nav a{font-size:.86rem}}
 </style>
+<style id="nav-harmonisation-20260930">
+/* Harmonisation navigation 30-09-2026 */
+.global-nav{
+  position:sticky;top:10px;z-index:9999;
+  display:flex;justify-content:center;align-items:center;gap:24px;flex-wrap:wrap;
+  padding:12px 18px 14px;background:rgba(7,7,6,.28);
+  border-bottom:1px solid rgba(216,181,91,.20);
+  backdrop-filter:blur(1px);
+}
+.global-nav a{
+  color:#f4ead2;text-decoration:none;font-family:Georgia,"Times New Roman",serif;
+  font-size:1rem;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,.9);
+}
+.global-nav a:hover{color:#d8b55b}
+@media(max-width:760px){.global-nav{top:6px;gap:11px;padding:10px 12px 12px}.global-nav a{font-size:.88rem}}
+</style>
+<style id="decor-nav-protection-20260930">
+.mandala-sep-top{top:52px;z-index:100!important}
+.mandala-tl,.mandala-tr{z-index:100!important}
+.global-nav{z-index:9999!important}
+header{margin-top:58px}
+</style>
 </head>
 
 <body>
@@ -656,47 +678,36 @@ function renderDetail(o){
   `;
 }
 
-const list = [
-  {
-    "titre": "Lunaison ",
-    "technique": "Tech peinture relief sur bois flotté - 30X25 - 80€",
-    "dimensions": "30X25 ",
-    "annee": "2026",
-    "prix": "80€",
-    "vendu": false,
-    "photo_principale": "images/oeuvres/p1010313-1.jpg",
-    "photos_details": [
-      "images/oeuvres/p1010314.jpg",
-      "images/oeuvres/p1010315.jpg"
-    ],
-    "description": ""
+let list = [];
+
+async function chargerCatalogue(){
+  try{
+    const r = await fetch("oeuvres.json", {cache:"no-store"});
+    if(!r.ok) throw new Error(`HTTP ${r.status}`);
+    list = await r.json();
+
+    const params = new URLSearchParams(window.location.search);
+    const wanted = params.get("oeuvre");
+
+    if(!wanted){
+      renderGallery(list);
+      return;
+    }
+
+    const oeuvre = list.find(o => slug(o.titre) === wanted || o.slug === wanted);
+    if(!oeuvre){
+      app.innerHTML = `<div class="empty">Cette œuvre n'a pas été trouvée.<br><br><a href="index.html" style="color:#d9b456">Retour à la galerie</a></div>`;
+      return;
+    }
+    document.title = `${oeuvre.titre} | Mandalaman`;
+    renderDetail(oeuvre);
+  }catch(err){
+    console.error(err);
+    app.innerHTML = `<div class="empty">Le catalogue n'a pas pu être chargé.<br><br><small>${esc(err.message)}</small></div>`;
   }
-];
+}
 
-(() => {
-  const params = new URLSearchParams(window.location.search);
-  const wanted = params.get("oeuvre");
-
-  if(!wanted){
-    renderGallery(list);
-    return;
-  }
-
-  const oeuvre = list.find(o => slug(o.titre) === wanted);
-
-  if(!oeuvre){
-    app.innerHTML = `
-      <div class="empty">
-        Cette œuvre n'a pas été trouvée.<br><br>
-        <a href="index.html" style="color:#d9b456">Retour à la galerie</a>
-      </div>
-    `;
-    return;
-  }
-
-  document.title = `${oeuvre.titre} | Mandalaman`;
-  renderDetail(oeuvre);
-})();
+chargerCatalogue();
 </script>
 
   <div id="lightbox" class="lightbox" onclick="fermerLightbox()">
