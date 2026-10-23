@@ -1,5 +1,34 @@
 [
- {"titre":"Se créer du bonheur n'est pas si compliqué,","date":"2022-05-28","image":"","extrait":"Il faut le vouloir et être patient, encore + patient, puis encore patient...","texte":"Texte de l'article à replacer ici depuis l'ancienne page.","slug":"se-creer-du-bonheur-n-est-pas-si-complique"},
- {"titre":"La refonte","date":"2022-05-27","image":"","extrait":"J'utilise la refonte de ce site avec beaucoup de plaisir car c'est un moyen de rassembler mes différentes activités...","texte":"Texte de l'article à replacer ici depuis l'ancienne page.","slug":"la-refonte"},
- {"titre":"Le mandala intuitif","date":"2022-05-25","image":"","extrait":"Prochainement quelques articles.","texte":"Texte de l'article à replacer ici depuis l'ancienne page.","slug":"le-mandala-intuitif"}
+  {
+    "titre": "Rentrée 2026 : un nouvel élan créatif",
+    "date": "2026-10-23",
+    "image": "",
+    "extrait": "Cette rentrée 2026 marque un tournant pour moi. Peinture, techno-magie et nouveaux horizons : un nouvel élan dans mes projets créatifs et éditoriaux.",
+    "texte": "Bonjour,\n\nCette rentrée 2026 marque un tournant pour moi. Je continue de travailler sur mon site avec l’IA et de perfectionner un certain nombre de techniques picturales. J’avance à grands pas, dirais-je.\n\nCette arrivée de l’IA dans nos ordinateurs et nos téléphones est, à mes yeux, une bonne chose. Au-delà des vagues de vidéos annonçant le danger apocalyptique de cette technologie que je qualifie de « techno-magie », j’y trouve beaucoup d’avantages et un soutien massif dans mes projets créatifs et éditoriaux.\n\nSa capacité de synthèse est un outil puissant pour l’organisation et la production, y compris artistique. Il est possible, par exemple, de réunir des éléments de plusieurs œuvres en une seule proposition. Même si l’on n’utilise pas directement le résultat de l’IA, on peut s’en inspirer, y trouver une piste et la prolonger par son propre travail.\n\nIl existe une grogne évidente face à ces changements. Certains y voient un terrain mouvant, des repères qui se dérobent. J’y vois personnellement la suite inéluctable de notre évolution, à la fois technologique et anthropologique.\n\nNous sommes arrivés sur une crête de notre évolution civilisationnelle, entre matérialisme et spiritualité. Il reste à organiser nos nouveaux horizons à la lumière de ce passé qui devient archives, y compris numériques : classer, trier, renommer, retrouver. Avec l’IA, ces opérations deviennent plus rapides et plus accessibles. Je pense que nous allons prendre une vitesse folle dans la création de nouveaux modes de production et de nouvelles relations au monde et aux autres.\n\nCe petit détour par la technologie permet d’élargir l’angle de vue sur la période que je traverse.\n\nMon art, lui aussi, prend de la vitesse. Depuis un ou deux ans, je ne cesse de produire, dans une continuité que je ne connaissais pas auparavant. Jusque-là, la création s’ouvrait à moi par fenêtres de temps, par espaces que je traversais avec une certaine angoisse : celle de ne pas pouvoir en retrouver le fil conducteur.\n\nAujourd’hui, j’aime cette autoroute qui s’est ouverte devant moi. J’aime toutes ces techniques que j’invente pour parfaire les images qui sortent de mon laboratoire intérieur.\n\nJe travaille beaucoup pour pouvoir les montrer, aussi bien dans le réel que dans le virtuel. Ce site participe à cet élan : il me permet de donner à voir mes œuvres, mais aussi de prendre la parole sur ce qui accompagne leur création.\n\nVoilà mon premier article sur mon nouveau site. Ça fait du bien !!!\n\nPatrick Duval Mandalaman.",
+    "slug": "rentree-2026-un-nouvel-elan-creatif"
+  },
+  {
+    "titre": "Se créer du bonheur n'est pas si compliqué,",
+    "date": "2022-05-28",
+    "image": "",
+    "extrait": "Il faut le vouloir et être patient, encore + patient, puis encore patient...",
+    "texte": "Texte de l'article à replacer ici depuis l'ancienne page.",
+    "slug": "se-creer-du-bonheur-n-est-pas-si-complique"
+  },
+  {
+    "titre": "La refonte",
+    "date": "2022-05-27",
+    "image": "",
+    "extrait": "J'utilise la refonte de ce site avec beaucoup de plaisir car c'est un moyen de rassembler mes différentes activités...",
+    "texte": "Texte de l'article à replacer ici depuis l'ancienne page.",
+    "slug": "la-refonte"
+  },
+  {
+    "titre": "Le mandala intuitif",
+    "date": "2022-05-25",
+    "image": "",
+    "extrait": "Prochainement quelques articles.",
+    "texte": "Texte de l'article à replacer ici depuis l'ancienne page.",
+    "slug": "le-mandala-intuitif"
+  }
 ]
